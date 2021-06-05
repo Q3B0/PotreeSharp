@@ -1,0 +1,27 @@
+﻿@page "/pointcloud";
+<div style="position:relative;height:100vh;">
+    <div class="btn-group" role="group" aria-label="Basic example" style="z-index:100">
+        <button type="button" class="btn btn-primary" @onclick="()=> { potree.Zoom(ratio++); }">放大</button>
+        <button type="button" class="btn btn-primary"  @onclick="()=> { potree.Zoom(ratio--); }">缩小</button>
+        <button type="button" class="btn btn-primary"  @onclick='()=> { potree.SetView("L");}'>左</button>
+        <button type="button" class="btn btn-primary" @onclick='()=> { potree.SetView("R");}'>右</button>
+        <button type="button" class="btn btn-primary" @onclick='()=> { potree.SetView("U");}'>上</button>
+        <button type="button" class="btn btn-primary" @onclick='()=> { potree.SetView("D");}'>下</button>
+        <button type="button" class="btn btn-primary" @onclick='()=> { potree.SetView("F");}'>前</button>
+        <button type="button" class="btn btn-primary" @onclick='()=> { potree.SetView("B");}'>后</button>
+        <button type="button" class="btn btn-primary" @onclick='()=> { potree.Translate("y",-10);}'>左移</button>
+        <button type="button" class="btn btn-primary" @onclick='()=> { potree.Translate("y",10);}'>右移</button>
+        <button type="button" class="btn btn-primary" @onclick='()=> { potree.Translate("z",-10);}'>上移</button>
+        <button type="button" class="btn btn-primary" @onclick='()=> { potree.Translate("z",10);}'>下移</button>
+        <button type="button" class="btn btn-primary" @onclick='()=> { potree.Translate("x",-10);}'>前移</button>
+        <button type="button" class="btn btn-primary" @onclick='()=> { potree.Translate("x",10);}'>后移</button>
+    </div>
+    <Potree @ref="potree" Url="@url" Ratio="@ratio" Direction="@direction"></Potree>
+</div>
+
+@code {
+    private Potree potree;
+    private string url = @"pointclouds\lion_takanawa_ept_bin\ept.json";
+    private int ratio = 2;
+    private string direction = "L";
+}

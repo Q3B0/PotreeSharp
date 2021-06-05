@@ -1,0 +1,36 @@
+﻿@inject PotreeJsInterop JsInterop;
+
+<div class="potree_container" style="position: absolute; width: 100%; height: 100%; left: 0px; top: 0px; ">
+    <div id="potree_render_area" style=" width: 100%; height: 100%;"></div>
+    <div id="potree_sidebar_container"> </div>
+</div>
+
+@code{
+    [Parameter]
+    public string Url { get; set; }
+    [Parameter]
+    public int Ratio { get; set; }
+    [Parameter]
+    public string Direction { get; set; }
+
+    protected async override Task OnAfterRenderAsync(bool firstRender)
+    {
+        if(firstRender)
+            await JsInterop.Init(Url, Ratio, Direction);
+        //return await base.OnInitializedAsync();
+    }
+
+    public async void Translate(string axix,double distance)
+    {
+        await JsInterop.Translate(axix,distance);
+    }
+
+    public async void SetView(string view)
+    {
+        await JsInterop.SetView(view);
+    }
+    public async void Zoom(int ratio)
+    {
+        await JsInterop.Zoom(ratio);
+    }
+}
